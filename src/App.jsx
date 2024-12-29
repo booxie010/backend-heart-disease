@@ -31,7 +31,7 @@ const HeartDiseaseForm = () => {
   const validateFormData = () => {
     const keys = Object.keys(formData);
     for (const key of keys) {
-      if (formData[key] === '' || isNaN(formData[key])) {
+      if (!formData.age || isNaN(formData.age) || formData.age <= 0) {
         alert('Please enter a valid value for ${key}');
         return false;
       }
@@ -63,13 +63,28 @@ const HeartDiseaseForm = () => {
           thal: parseInt(formData.thal),
         }),
       });
+      console.log(JSON.stringify({
+        age: parseInt(formData.age),
+        sex: parseInt(formData.sex),
+        cp: parseInt(formData.cp),
+        trestbps: parseInt(formData.trestbps),
+        chol: parseInt(formData.chol),
+        fbs: parseInt(formData.fbs),
+        restecg: parseInt(formData.restecg),
+        thalach: parseInt(formData.thalach),
+        exang: parseInt(formData.exang),
+        oldpeak: parseFloat(formData.oldpeak),
+        slope: parseInt(formData.slope),
+        ca: parseInt(formData.ca),
+        thal: parseInt(formData.thal),
+      }));
 
       const data = await response.json();
       if (response.ok) {
         setPrediction(data.prediction);
         setProbabilities({
-          negative: data.probabilities.negative,
-          positive: data.probabilities.positive,
+          negative: parseFloat(data.probabilities.negative)||0,
+          positive: parseFloat(data.probabilities.positive)||0,
         });
       } else {
         setPrediction('Server Error:' + (data.error || 'Unknown error occurred'));
