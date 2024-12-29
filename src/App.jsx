@@ -281,8 +281,8 @@ const HeartDiseaseForm = () => {
           <p>{prediction}</p>
           {probabilities && (
             <div>
-              <p>Probabilitas Risiko Negatif: {probabilities.negative}</p>
-              <p>Probabilitas Risiko Positif: {probabilities.positive}</p>
+              <p>Probabilitas Risiko Negatif: {probabilities.negative}%</p>
+              <p>Probabilitas Risiko Positif: {probabilities.positive}%</p>
             </div>
           )}
         </div>
